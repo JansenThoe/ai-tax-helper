@@ -1,0 +1,23 @@
+W-2 WAGE AND TAX STATEMENT — Tax Year 2024
+--------------------------------------------------
+Employer: Acme Corporation
+Employer EIN: 12-3456789
+Employer Address: 123 Business Ave, New York, NY 10001
+
+Employee: John Sample
+Employee SSN: XXX-XX-1234
+Employee Address: 456 Main St, Austin, TX 78701
+
+Box 1  - Wages, tips, other compensation:     $72,500.00
+Box 2  - Federal income tax withheld:         $10,875.00
+Box 3  - Social security wages:               $72,500.00
+Box 4  - Social security tax withheld:         $4,495.00
+Box 5  - Medicare wages and tips:             $72,500.00
+Box 6  - Medicare tax withheld:                $1,051.25
+Box 12 - Code DD (employer health coverage):   $3,200.00
+Box 14 - State disability insurance (SDI):       $362.50
+Box 15 - State: TX
+Box 16 - State wages:                         $72,500.00
+Box 17 - State income tax withheld:                $0.00
+--------------------------------------------------
+NOTE: Texas has no state income tax.

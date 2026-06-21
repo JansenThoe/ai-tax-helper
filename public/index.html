@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tax Helper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Top bar ───────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">📋</span>
+        <span class="logo-text">AI Tax Helper</span>
+      </div>
+      <span class="header-tagline">Powered by Gemini 2.5 Flash</span>
+    </div>
+  </header>
+
+  <!-- ── App shell ─────────────────────────────────────────────── -->
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" aria-label="Main navigation">
+      <span class="sidebar-section-label">Workspace</span>
+
+      <button class="nav-item active" aria-current="page">
+        <span class="nav-icon" aria-hidden="true">🔍</span>
+        Document Analysis
+      </button>
+      <button class="nav-item">
+        <span class="nav-icon" aria-hidden="true">📄</span>
+        Sessions
+      </button>
+      <button class="nav-item">
+        <span class="nav-icon" aria-hidden="true">⚙️</span>
+        Settings
+      </button>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main-content" id="main">
+      <div class="content-inner">
+
+        <!-- Two-column: input left, output right -->
+        <div class="columns">
+
+          <!-- ── Left: Input panel ─────────────────────────────── -->
+          <div style="display:flex;flex-direction:column;gap:12px;">
+
+            <!-- Step 1: Documents -->
+            <div class="card card-compact">
+              <div class="step-header">
+                <span class="step-badge" aria-hidden="true">1</span>
+                <h2>Upload Documents</h2>
+              </div>
+              <p class="step-desc">PDFs, images, or text files — W-2, 1099, receipts, bank statements, etc.</p>
+
+              <div
+                class="drop-zone"
+                id="dropZone"
+                role="button"
+                tabindex="0"
+                aria-label="Drop files here or click to select"
+              >
+                <span class="drop-icon" aria-hidden="true">📂</span>
+                <span class="drop-text">Drop files or <strong>click to browse</strong></span>
+                <span class="drop-hint">PDF · PNG · JPG · WEBP · TXT · CSV &nbsp;·&nbsp; Max 20 MB · Up to 10 files</span>
+                <input
+                  type="file"
+                  id="fileInput"
+                  multiple
+                  accept=".pdf,.png,.jpg,.jpeg,.webp,.txt,.csv"
+                  aria-hidden="true"
+                  tabindex="-1"
+                />
+              </div>
+
+              <ul class="file-list" id="fileList" aria-label="Selected files" aria-live="polite"></ul>
+            </div>
+
+            <!-- Step 2: Question -->
+            <div class="card card-compact">
+              <div class="step-header">
+                <span class="step-badge" aria-hidden="true">2</span>
+                <h2>Ask Your Question</h2>
+              </div>
+              <p class="step-desc">What do you want to know about these documents?</p>
+
+              <label for="questionInput">Your question</label>
+              <textarea
+                id="questionInput"
+                rows="4"
+                placeholder='e.g. "How much did I spend on travel based on these documents?"'
+                aria-label="Your tax question"
+                maxlength="2000"
+              ></textarea>
+              <div class="char-count" id="charCount" aria-live="polite">0 / 2000</div>
+
+              <div class="quick-questions" aria-label="Quick question examples">
+                <span class="quick-label">Quick:</span>
+                <button class="quick-btn" type="button" data-q="What is my total income across all documents?">Total income</button>
+                <button class="quick-btn" type="button" data-q="What deductions am I eligible for based on these documents?">Deductions</button>
+                <button class="quick-btn" type="button" data-q="How much did I spend on travel and meals?">Travel & meals</button>
+                <button class="quick-btn" type="button" data-q="What business expenses are documented here?">Business expenses</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Tax Profile -->
+            <div class="card card-compact">
+              <div class="step-header">
+                <span class="step-badge" aria-hidden="true">3</span>
+                <h2>Tax Profile <span class="optional-tag">Optional</span></h2>
+              </div>
+              <p class="step-desc">Helps the AI apply the right tax rules for your situation.</p>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="filingStatus">Filing Status</label>
+                  <select id="filingStatus">
+                    <option value="">— Select —</option>
+                    <option>Single</option>
+                    <option>Married Filing Jointly</option>
+                    <option>Married Filing Separately</option>
+                    <option>Head of Household</option>
+                    <option>Qualifying Surviving Spouse</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="stateOfResidence">State of Residence</label>
+                  <select id="stateOfResidence">
+                    <option value="">— Select —</option>
+                    <option>Alabama</option><option>Alaska</option><option>Arizona</option>
+                    <option>Arkansas</option><option>California</option><option>Colorado</option>
+                    <option>Connecticut</option><option>Delaware</option><option>Florida</option>
+                    <option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                    <option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                    <option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+                    <option>Maine</option><option>Maryland</option><option>Massachusetts</option>
+                    <option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                    <option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                    <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option>
+                    <option>New Mexico</option><option>New York</option><option>North Carolina</option>
+                    <option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                    <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                    <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option>
+                    <option>Texas</option><option>Utah</option><option>Vermont</option>
+                    <option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                    <option>Wisconsin</option><option>Wyoming</option><option>District of Columbia</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Analyze button -->
+            <button class="btn-analyze" id="analyzeBtn" type="button" aria-label="Analyze documents">
+              <span class="btn-icon" aria-hidden="true">🔍</span>
+              <span class="btn-text">Analyze Documents</span>
+            </button>
+            <p class="kbd-hint"><kbd>⌘</kbd> + <kbd>Enter</kbd> to analyze</p>
+
+          </div><!-- /left -->
+
+          <!-- ── Right: Output panel ───────────────────────────── -->
+          <section class="panel-output" aria-label="Results" aria-live="polite">
+
+            <!-- Idle -->
+            <div class="output-idle" id="outputIdle">
+              <div class="idle-illustration" aria-hidden="true">📊</div>
+              <h3>Results will appear here</h3>
+              <p>Upload documents, enter your question, and click Analyze.</p>
+              <div class="flowchart" aria-label="How it works">
+                <div class="flow-step"><span aria-hidden="true">📂</span> Upload documents</div>
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+                <div class="flow-step"><span aria-hidden="true">💬</span> Ask your question</div>
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+                <div class="flow-step active"><span aria-hidden="true">🤖</span> AI analyzes</div>
+                <div class="flow-arrow" aria-hidden="true">↓</div>
+                <div class="flow-step"><span aria-hidden="true">📋</span> Get answers</div>
+              </div>
+            </div>
+
+            <!-- Loading -->
+            <div class="output-loading hidden" id="outputLoading" role="status" aria-label="Analyzing documents">
+              <div class="spinner spinner-lg" aria-hidden="true"></div>
+              <p class="loading-text">Analyzing your documents…</p>
+              <p class="loading-sub">This may take a few seconds depending on document size.</p>
+            </div>
+
+            <!-- Results -->
+            <div class="output-results hidden" id="outputResults">
+
+              <div class="result-summary" id="resultSummary" role="status"></div>
+
+              <div class="tabs" role="tablist" aria-label="Result sections">
+                <button class="tab active" role="tab" aria-selected="true"  data-tab="extracted"    aria-controls="tabExtracted">📊 Extracted Data</button>
+                <button class="tab"        role="tab" aria-selected="false" data-tab="answer"       aria-controls="tabAnswer">💬 Direct Answer</button>
+                <button class="tab"        role="tab" aria-selected="false" data-tab="instructions" aria-controls="tabInstructions">📋 Instructions</button>
+              </div>
+
+              <!-- Tab: Extracted Data -->
+              <div class="tab-panel active" id="tabExtracted" role="tabpanel">
+                <p class="panel-title">Extracted Values</p>
+                <div style="overflow-x:auto;">
+                  <table class="data-table" aria-label="Extracted financial data">
+                    <thead>
+                      <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Source</th>
+                      </tr>
+                    </thead>
+                    <tbody id="extractedTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Tab: Direct Answer -->
+              <div class="tab-panel hidden" id="tabAnswer" role="tabpanel">
+                <p class="panel-title">Direct Answer</p>
+                <div class="answer-box" id="answerBox" aria-live="polite"></div>
+              </div>
+
+              <!-- Tab: Instructions -->
+              <div class="tab-panel hidden" id="tabInstructions" role="tabpanel">
+                <p class="panel-title">What to Do Next</p>
+                <ol class="instruction-list" id="instructionList"></ol>
+              </div>
+
+              <!-- Actions -->
+              <div class="result-actions">
+                <button class="btn-secondary" id="copyBtn" type="button">📋 Copy Results</button>
+                <button class="btn-secondary" id="resetBtn" type="button">🔄 Start Over</button>
+              </div>
+
+            </div><!-- /output-results -->
+
+            <!-- Error -->
+            <div class="output-error hidden" id="outputError" role="alert">
+              <div class="error-icon" aria-hidden="true">⚠️</div>
+              <p class="error-message" id="errorMessage">An error occurred.</p>
+              <button class="btn-secondary" id="retryBtn" type="button">Try Again</button>
+            </div>
+
+          </section><!-- /panel-output -->
+
+        </div><!-- /columns -->
+      </div><!-- /content-inner -->
+    </main>
+  </div><!-- /app-shell -->
+
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    AI Tax Helper uses Gemini AI to analyze documents.
+    <strong style="color:var(--on-surface-muted)">Not a substitute for professional tax advice.</strong>
+    Always verify with a qualified CPA or tax professional.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

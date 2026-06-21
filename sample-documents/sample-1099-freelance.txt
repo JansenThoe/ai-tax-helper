@@ -1,0 +1,25 @@
+1099-NEC NONEMPLOYEE COMPENSATION — Tax Year 2024
+--------------------------------------------------
+Payer: Design Studio LLC
+Payer EIN: 98-7654321
+Payer Address: 789 Creative Blvd, Austin, TX 78702
+
+Recipient: John Sample
+Recipient SSN: XXX-XX-1234
+Recipient Address: 456 Main St, Austin, TX 78701
+
+Box 1  - Nonemployee compensation:            $18,400.00
+Box 4  - Federal income tax withheld:              $0.00
+--------------------------------------------------
+BUSINESS EXPENSES REPORTED BY RECIPIENT (Schedule C):
+
+  Travel (flights + hotels for client meetings):  $3,200.00
+  Home office (200 sq ft / 1,000 sq ft home):     $1,400.00
+  Software subscriptions (Adobe, Figma, etc.):      $960.00
+  Meals with clients (50% deductible):              $640.00
+  Professional development / courses:               $750.00
+  Equipment (laptop, monitor):                    $2,100.00
+
+  Total business expenses:                        $9,050.00
+  Net self-employment income:                     $9,350.00
+--------------------------------------------------

@@ -142,6 +142,7 @@ Please analyze the documents and respond in the specified JSON format.`;
       ],
       config: {
         responseMimeType: "application/json",
+        temperature: 0, // deterministic output for financial figures
       },
     });
 
